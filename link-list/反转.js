@@ -1,14 +1,11 @@
 "use strict";
-/// <reference path="../global.d.ts" />
 /**
  * @description
  *
- * 反转一个单链表
+ * 题目：反转一个单链表
  *
  * 输入: 1->2->3->4->5->NULL
  * 输出: 5->4->3->2->1->NULL
- *
- * 需要定义好数据结构
  */
 /**
  * @description
