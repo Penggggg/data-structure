@@ -20,7 +20,11 @@
  * @description
  * 方法1，递归框框法( K + 1 )，
  * 
- * 另外递归的时候，可以进行数据交互
+ * Tips:
+ * 
+ * 每次递归处理好核心流程，内部翻转，
+ * 然后通过return，进行数据交互
+ * 补齐不同框之间的连接
  */
 const resverseK = ( k: number, kuangStart?: LinkListItem ) => {
 
@@ -38,7 +42,7 @@ const resverseK = ( k: number, kuangStart?: LinkListItem ) => {
 
     let pre: LinkListItem | undefined = undefined;
     let cur: LinkListItem | undefined = kuangStart;
-    
+
     for ( let i = 0; i < k; i++ ) {
         
         let next: LinkListItem | undefined = cur ? cur.next : undefined;
