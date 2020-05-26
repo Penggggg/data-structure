@@ -105,3 +105,27 @@ const reverseTwins2 = ( item?: LinkListItem ) => {
     }
     innerLoop( item );
 }
+
+
+
+
+/** 
+ * 
+ * @description
+ * 方法三，框框法：2+1 ( 递归 )
+ * 
+ * Tips:
+ * 【虚拟框框法：2+1】每次框住2个，然后跟此框后的1个进行交互
+ */
+const reverseTwins3 = ( kuangStart?: LinkListItem ) => {
+    if ( !kuangStart ) { return; }
+
+    let kuangEnd = kuangStart.next;
+    let KuangNext = !!kuangEnd ? kuangEnd.next : undefined;
+
+    kuangStart.next = KuangNext;
+    if ( !!kuangEnd ) {
+        kuangEnd.next = kuangStart;
+    }
+    reverseTwins3( kuangStart );
+}
