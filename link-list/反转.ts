@@ -1,4 +1,5 @@
 /**
+ * 
  * @description
  * 
  * 题目：反转一个单链表
@@ -14,13 +15,14 @@
 
 
 /** 
+ * 
  * @description
  * 方法一，【遍历法】
  * 
  * 用 next 指针 + while, 从头开始【遍历】
  * 
- * Tipss:
- * 【虚拟框框法】，每次只框住2个元素，并处理逻辑
+ * Tips:
+ * 【虚拟框框法】每次只框住2个元素，并处理逻辑
  * 处理完一次后，框框往后移一位
  */
 const reverseLinkList1 = ( item?: LinkListItem ) => {
