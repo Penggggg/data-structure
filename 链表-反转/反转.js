@@ -1,5 +1,6 @@
 "use strict";
 /**
+ *
  * @description
  *
  * 题目：反转一个单链表
@@ -8,13 +9,14 @@
  * 输出: 5->4->3->2->1->NULL
  */
 /**
+ *
  * @description
  * 方法一，【遍历法】
  *
  * 用 next 指针 + while, 从头开始【遍历】
  *
- * Tipss:
- * 【虚拟框框法】，每次只框住2个元素，并处理逻辑
+ * Tips:
+ * 【虚拟框框法】每次只框住2个元素，并处理逻辑
  * 处理完一次后，框框往后移一位
  */
 var reverseLinkList1 = function (item) {
