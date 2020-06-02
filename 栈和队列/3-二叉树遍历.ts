@@ -57,11 +57,11 @@ const normalTraverse = ( node?: BinaryTreeNode ) => {
             if ( !n ) { return; }
             if ( !!n.left ) {
                 queenNodes.unshift( n.left );
-                innerOutput.unshift( n.left.val );
+                innerOutput.push( n.left.val );
             }
             if ( !!n.right ) {
                 queenNodes.unshift( n.right );
-                innerOutput.unshift( n.right.val );
+                innerOutput.push( n.right.val );
             }
         }
         
