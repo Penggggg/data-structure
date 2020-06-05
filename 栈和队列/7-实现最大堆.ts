@@ -32,7 +32,7 @@
  * Tips:
  * 拆解最小操作的API，如：_parent / _leftChild / _swap
  */
-class MaxHeap {
+export class MaxHeap {
 
     data: number[ ] = [ ];
 
@@ -44,6 +44,11 @@ class MaxHeap {
     public add( val: number ) {
         this.data.push( val );
         this._siftUp( this.data.length - 1 );
+    }
+
+    /** 获取长度 */
+    public getSize( ) {
+        return this.data.length;
     }
 
     /** 优先级最高出堆 */
