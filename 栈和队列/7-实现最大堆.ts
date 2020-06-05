@@ -25,8 +25,12 @@
  * 实现最大堆（二叉树）
  * 另外：数组 即 最大堆
  * 
- * Tips：堆的细节在内部，甚至传进来的arr只是metadata
- * 数组到堆的映射，体现在内部API上，如：_parent _leftChild
+ * Tips1：
+ * 堆的细节在内部，甚至传进来的arr只是metadata
+ * 数组到堆的映射，体现在内部API上，
+ * 
+ * Tips:
+ * 拆解最小操作的API，如：_parent / _leftChild / _swap
  */
 class MaxHeap {
 
