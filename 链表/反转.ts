@@ -14,51 +14,52 @@
 
 
 
-/** 
+/**
  * 
  * @description
- * 方法一，【遍历法】
- * 
- * 用 next 指针 + while, 从头开始【遍历】
- * 
- * Tips:
- * 【虚拟框框法】每次只框住2个元素，并处理逻辑
- * 处理完一次后，框框往后移一位
+ * 自己做的
  */
-const reverseLinkList1 = ( item?: LinkListItem ) => {
+const reverse1 = ( item?: LinkListItem ) => {
+    if ( !item ) return null;
 
-    if ( !item ) { return null; }
+    const innerReverse = ( cur?: LinkListItem ) => {
+        if ( !cur ) return;
+        const nextEle = cur.next;
 
-    let pre: LinkListItem | undefined = undefined;
-    let cur: LinkListItem | undefined = item;
+        if ( !nextEle ) return;
+        nextEle.next = cur;
 
-    while ( cur ) {
-
-        let next: LinkListItem | undefined = cur.next;
-        cur.next = pre;
-
-        pre = cur;
-        cur = next;
+        innerReverse( nextEle );        
     }
+
+    item.next = undefined;
+    innerReverse( item );
 }
+
+
+
+
+
+
+
+
+
+
 
 /**
  * @description
- * 方法2，【递归法】
+ * 方法1，【递归法】
  * 
  * 判断 next 是否存在，存在的话进行递归
  * 
  */
-const reverseLinkList2 = ( item?: LinkListItem ) => {
-    if ( !item ) { return null; }
-
-    const innerReverse = ( item?: LinkListItem, pre?: LinkListItem ) => {
-        if ( !item ) { return null; }
-
-        const next = item.next;
-        item.next = pre;
-        innerReverse( next, item );
+let reverseList = (head: any) =>{
+    let reverse = (pre: any, cur: any): any => {
+      if(!cur) return pre;
+      // 保存 next 节点
+      cur.next = pre;
+      return reverse(cur, cur.next);
     }
-
-    innerReverse( item );
+    return reverse(null, head);
 }
+  
