@@ -36,23 +36,19 @@ const compose = ( list1: LinkListItem, list2: LinkListItem ) => {
  * 
  * Tips1: 递归法
  * 上一个训练中，已经掌握了，2条链表合并的方式
- * 这一次中，除了K条链表一次性对比，还可以最小颗粒化的逐步处理，每次合并2条，直到K条变成1条
+ * K条链表可每次合并2条，直到K条变成1条
  * 
  */
-const composeK = ( list: LinkListItem[ ]) => {
-
-    let _list = [ ...list ];
-    let cur: LinkListItem | undefined = { value: '' };
-
-    const innerCompose = ( l1?: LinkListItem, l2?: LinkListItem ) => {
-        if ( _list.length === 0 ) { return; }
-        if ( !l1 ) { return l2; }
-        if ( !l2 ) { return l1; }
-        cur = compose( l1, l2 );
-        innerCompose( cur, _list.pop( ))
+const composeK = ( list: any[ ]) => {
+    // 特殊情况
+    if ( !list.length ) return null;
+    if ( list.length === 1 ) return list[ 0 ];
+    // 初始化
+    let res: any = compose( list.shift( ), list.shift( ));
+    while ( !!list.length ) {
+        res = compose( res, list.shift( ));
     }
-    innerCompose( cur, _list.pop( ));
-    return cur;
+    return res;
 }
 
 /**

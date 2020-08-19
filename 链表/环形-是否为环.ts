@@ -21,17 +21,15 @@
  * 且，Set要作为统筹，不能在每个递归中，都拿到同一个Set。
  * 
  */
-const isRound1 = ( item?: LinkListItem ) => {
+const isRound1 = ( item?: any ) => {
 
     if ( !item ) { return false; }
 
     let set = new Set( );
-    let cur: LinkListItem | undefined = item;
+    let cur: any = item;
 
     while ( !!cur ) {
-        if ( set.has( cur )) {
-            return true;
-        }
+        if ( set.has( cur )) return true;
         set.add( cur );
         cur = cur.next;
     }
@@ -47,19 +45,18 @@ const isRound1 = ( item?: LinkListItem ) => {
  * 方法2，相对速度法
  * 
  * Tips:
- * 慢指针为参考系，快指针每次相对慢指针向前走一步，如果两者相遇，则表明已经形成了环。
+ * 快指针每次相对慢指针向前走一步(路程差要越来越大，而不是恒定大)，如果两者相遇，则表明已经形成了环。
  */
-const isRound2 = ( item?: LinkListItem ) => {
+const isRound2 = ( item?: any ) => {
 
-    if ( !item ) { return false; }
+    if ( !item ) return false;
 
-    let slow: LinkListItem | undefined = item;
-    let fast: LinkListItem | undefined = item;
+    let slow: any = item;
+    let fast: any = item;
 
     while ( !!slow && !!fast && !!fast.next ) {
         slow = slow.next;
         fast = fast.next.next;
-
         // 两者相遇
         if ( slow === fast ) {
             return true

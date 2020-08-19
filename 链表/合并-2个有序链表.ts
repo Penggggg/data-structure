@@ -3,7 +3,7 @@
  * @description
  * 题目
  * 
- * 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的
+ * 将两个有序链表合并为一个新的有序链表
  * 
  * 输入：1->2->4, 1->3->4
  * 输出：1->1->2->3->4->4
@@ -64,17 +64,17 @@ const compose1 = ( list1: LinkListItem, list2: LinkListItem ) => {
  * 
  * Tips1：递归时，通过相邻执行的数据交互，达到递归的效果
  */
-const compose2 = ( list1: LinkListItem, list2: LinkListItem ) => {
+const compose2 = ( list1: any, list2: any ) => {
     // 这个函数名很有意思，意思是把剩余2段，合并起来
-    const merge = ( l1?: LinkListItem, l2?: LinkListItem ) => {
+    const merge = ( l1?: any, l2?: any ) => {
         if ( !l1 ) { return l2; }
         if ( !l2 ) { return l1; }
         if ( l1.value > l2.value ) {
             l2.next = merge( l1, l2.next );
-            return l2;
+            return l2; // 返回该段引用
         } else {
             l1.next = merge( l1.next, l2 );
-            return l1;
+            return l1; // // 返回该段引用
         }
     }
     return merge( list1, list2 );

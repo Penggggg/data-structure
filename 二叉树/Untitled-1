@@ -1,0 +1,63 @@
+- 题目
+
+> 给定一个二叉树，检查它是否是镜像对称的。
+
+```
+// 对称：
+       1 
+      / \
+     2   2
+    / \ / \
+   3  4 4  3
+
+// 非对称：
+       1
+      / \
+     2   2
+      \   \
+      3    3
+```
+
+- 解析
+
+> 需要时间老人存储每层的数据，所以可以确定递归在主函数内部，而不是主函数本身
+
+```
+// 递推公式：
+bfs( n ) = analyz( floorEle( n )) + bfs( n + 1 );
+
+// 终止条件：
+floorEle( n ).length === 0 ||
+    !analyz( floorEle( n ))
+
+// 递-时间老人：当前层数的元素
+const floorEle = [ ]
+```
+
+- 核心代码
+
+```
+const isSymmetry = ( root ) => {
+    const bfs = ( floorEle ) => {
+
+        if ( !floorEle.length ) return true;
+        if ( floorEle.length % 2 === 1 ) return false;
+        if ( floorEle.every( x => x=== null )) return true;
+
+        // 广度 获取下一层元素
+        const nextFloor = [ ];
+        floorEle.map( e => {
+            nextFloor.push( !!e ? e.left : null );
+            nextFloor.push( !!e ? e.left : null );
+        });
+
+        while( floorEle.length > 0 ) {
+            const tail = floorEle.pop( );
+            const head = floorEle.shift( );
+            if ( tail !== head ) return false;
+        }
+        bfs( nextFloor );
+    }
+    return bfs([ root.left, root.right ]);
+}
+```

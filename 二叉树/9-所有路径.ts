@@ -47,3 +47,38 @@ var binaryTreePaths = function(root: any) {
     dfs(root);
     return res;
 };
+
+/**
+ * 递推：
+ * dfs( n ) = dfs( n.left ) 串行 dfs( n.right )
+ * 
+ * 终止：
+ * !n.left && !n.right
+ * 
+ * 递推-时间老人
+ * 此层及以上的元素
+ * 
+ * 终止-回溯：
+ * 回退此层元素
+ */
+
+const treePaths = ( root: any ) => {
+
+    const paths: any[ ] = [ ];
+    const results: any[ ] = [ ];
+
+    const dfs = ( n: any ) => {
+
+        paths.push( n );
+
+        if ( !n.left && !n.right ) {
+            results.push( paths.join('->'));
+            return paths.pop( );
+        }
+
+        !!n.left && dfs( n.left );
+        !!n.right && dfs( n.right );
+    }
+    dfs( root );
+    return results;
+}
