@@ -1,24 +1,14 @@
 /**
  * 
  * @description
- * 题目：
  * 
- * 同上
- */
-
-/**
- * 
- * @description
- * 方法1
- * 
- * Tips1:
- * 用2个队列，实现栈的进出顺序
+ * 思路:
+ * 利用双队列
  * 
  * 队列1：一直出队列，把最后一个元素返回
-   队列2，把队列1的出队元素，装好
+   队列2：把队列1的出队元素，装好
  * 
- * 队列1：
- * 队列2：均为装载出队列的元素
+ * 队列1 和 队列2 再互换
  */
 
 /**
@@ -28,13 +18,13 @@
  */
 class Queue {
 
-    data: number[ ] = [ ];
+    data: any[ ] = [ ];
 
-    constructor( meta: number[ ]) {
+    constructor( meta: any[ ]) {
         this.data = meta;
     }
 
-    public add( num: number | undefined ) {
+    public add( num: any ) {
         num !== undefined && this.data.unshift( num );
     }
 

@@ -2,7 +2,9 @@
 /**
  * 
  * @description
- * 实现一个优先队列
+ *
+ * 思路：
+ * 基于大顶堆，只是封装了Max
  */
 
  import { MaxHeap } from './7-实现最大堆';
