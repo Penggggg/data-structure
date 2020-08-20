@@ -30,26 +30,19 @@
  * 2："{[]}"
  *
  * 即：遇到右括号时，要消除掉最近的左括号
- * 
- * Tips2:
- * 手动分开左、右括号
  */
 const effectiveChar = ( s: string ) => {
-    const stack = [ ];
 
+    /** 特殊情况 */
     if ( s.length % 2 === 1 ) { return false; }
 
-    for ( let i = 0; i < s.length; i++ ) {
-        const ch = s[ i ];
-
-        // 遇到左括号
+    const stack = [ ];
+    for( let ch of s ) {
         if ( ch === '(' || ch === '[' || ch === '{' ) {
-            stack.push( ch );
-
-        // 遇到右括号
+            stack.push( ch )
         } else {
             const left = stack.pop( );
-            if ( !left ) { return false;}
+            if ( !left ) return false;
             if (( ch === ')' && left !== '(' ) ||
                 ( ch === '}' && left !== '{' ) ||
                 ( ch === ']' && left !== '[' )) {
@@ -57,6 +50,5 @@ const effectiveChar = ( s: string ) => {
             }
         }
     }
-
     return true;
 }

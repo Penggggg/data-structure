@@ -2,12 +2,12 @@
  * 
  * @description
  * 题目：
- * 给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）
+ * 给定一个二叉树，【按层】遍历的节点
  * 
  *   3
     / \
-    9  20
-    /  \
+   9  20
+     /  \
     15   7
 
  * 输出：
@@ -19,56 +19,31 @@
  */
 
 
+
 /**
  * 
  * @description
- * 方法一，最小模型法
  * 
- * Tips1：
- * 以 节点A -> A.left -> A.right 的顺序、操作次序为最小模型，跑通模型的逻辑。
- * 然后通过递归或while或循环，跑完剩余循环
- * 
- * Tips2：
- * 队列进出：unshift、pop
- * 栈进出：unshift、shift
+ * 思路：
+ * while ( !!queue.length ) 
+ * 节点A -> A.left -> A.right
  */
-const normalTraverse = ( node?: BinaryTreeNode ) => {
-    if ( !node ) { return[ ];}
+const levelMap = ( node?: BinaryTreeNode ) => {
+    if ( !node ) return [ ];
 
-    const result: any[ ] = [
-        [ node.val ]
-    ];
+    const result = [ ];
+    let queue: any = [ node ];
 
-    const innerTraverse = ( nodes: BinaryTreeNode[ ]) => {
-
-        let _nodes = [ ...nodes ];
-
-        /** 用来输出 */
-        const innerOutput: number[ ] = [ ];
-
-        /** 用来下次遍历 */
-        const queenNodes: BinaryTreeNode[ ] = [ ];
-
-        /** 先进先出 -> 队列 */
-        while ( _nodes.length > 0 ) {
-
-            const n = _nodes.pop( );
-
-            if ( !n ) { return; }
-            if ( !!n.left ) {
-                queenNodes.unshift( n.left );
-                innerOutput.push( n.left.val );
-            }
-            if ( !!n.right ) {
-                queenNodes.unshift( n.right );
-                innerOutput.push( n.right.val );
-            }
+    while ( !!queue.length ) {
+        const _queue = [ ];
+        const level = [ ];
+        for ( let n of queue ) {
+            level.push( n.val )
+            _queue.push( n.left );
+            _queue.push( n.right );
         }
-        
-        result.push( innerOutput );
-        queenNodes.length > 0 && innerTraverse( queenNodes );
+        result.push( level );
+        queue = _queue.filter( x => !!x );
     }
-
-    innerTraverse([ node ]);
     return result;
 }

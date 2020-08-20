@@ -13,7 +13,7 @@
  * @description
  * 方法1:：最小功能拆解 + 递归
  */
-const flatten = ( nest: any[ ]): any[ ] => {
+const flatten2 = ( nest: any[ ]): any[ ] => {
     return nest.reduce(( cur, pre ) => (
         pre.concat( Array.isArray( cur ) ? flatten( cur ) : pre )
     ), [ ]);

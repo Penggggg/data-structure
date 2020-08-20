@@ -26,110 +26,31 @@
  * 
  * @description 
  * 
- * Tips1：
+ * 思路1：
  * 操作方向发生改变
+ * 
+ * 思路2：
+ * 数据源的方向发生改变
  */
 const ZTraverse1 = ( node?: BinaryTreeNode ) => {
-    if ( !node ) { return[ ];}
+    if ( !node ) return [ ];
+    
+    let dir = true;
+    const result = [ ];
+    let queue: any = [ node ];
 
-    const result: any = [ 
-        [ node.val ]
-    ];
-
-    const innerTraverse = ( nodes: BinaryTreeNode[ ], direction: 'from-left' | 'from-right' ) => {
-
-        const _nodes = [ ...nodes ];
-
-        /** 用来输出 */
-        const innerOutput: number[ ] = [ ];
-
-        /** 用来下次遍历 */
-        const queenNodes: BinaryTreeNode[ ] = [ ];
-
-        while ( _nodes.length > 0 ) {
-
-            const n = direction === 'from-right' ?
-                _nodes.pop( ) : _nodes.shift( );
-
-            if ( !n ) { return;}
-
-            const l = n.left;
-            const r = n.right;
-
-            if ( direction === 'from-right' ) {
-                if ( !!r ) {
-                    queenNodes.unshift( r );
-                    innerOutput.push( r.val );
-                }
-                if ( !!l ) {
-                    queenNodes.unshift( l );
-                    innerOutput.push( l.val );
-                }
-            } else {
-                if ( !!l ) {
-                    queenNodes.unshift( r );
-                    innerOutput.push( r.val );
-                }
-                if ( !!r ) {
-                    queenNodes.unshift( r );
-                    innerOutput.push( r.val );
-                }
-            }
-            result.push( innerOutput );
-            queenNodes.length > 0 && innerTraverse( queenNodes, direction === 'from-left' ? 'from-right' : 'from-left' );
+    while ( !!queue.length ) {
+        const _queue: any = [ ];
+        const level = [ ];
+        for ( let n of queue ) {
+            level.push( n.val )
+            _queue[ !dir ? 'push' : 'unshift' ]( n.left )
+            _queue[ !dir ? 'push' : 'unshift' ]( n.right )
         }
+        dir = !dir;
+        result.push( level );
+        queue = _queue.filter(( x: any ) => !!x );
     }
-
-    innerTraverse([ node ], 'from-right');
     return result;
 }
-
-
-/**
- * 
- * @description 
- * 
- * Tips1：
- * 除了操作方向发生改变以外，也可以是数据源的方向发生改变
- */
-const ZTraverse2 = ( node?: BinaryTreeNode ) => {
-    if ( !node ) { return[ ];}
-
-    let level = 1;
-    const result: any[ ] = [
-        [ node.val ]
-    ];
-
-    const innerTraverse = ( nodes: BinaryTreeNode[ ]) => {
-
-        let _nodes = [ ...nodes ];
-
-        /** 用来输出 */
-        const innerOutput: number[ ] = [ ];
-
-        /** 用来下次遍历 */
-        const queenNodes: BinaryTreeNode[ ] = [ ];
-
-        /** 先进先出 -> 队列 */
-        while ( _nodes.length > 0 ) {
-
-            const n = _nodes.pop( );
-
-            if ( !n ) { return; }
-            if ( !!n.left ) {
-                queenNodes.unshift( n.left );
-                innerOutput.push( n.left.val );
-            }
-            if ( !!n.right ) {
-                queenNodes.unshift( n.right );
-                innerOutput.push( n.right.val );
-            }
-        }
-        
-        result.push( innerOutput );
-        queenNodes.length > 0 && innerTraverse((( level++ ) % 2 === 1 ) ? queenNodes.reverse( ) : queenNodes );
-    }
-
-    innerTraverse([ node ]);
-    return result;
-}
+ 
