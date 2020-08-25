@@ -1,32 +1,32 @@
-/// <reference path="../global.d.ts" />
-
 /**
  * 
  * @description
  * 题目：
  * 
  * 前序遍历一个二叉树
+ * 顺序：父、左子、右子
  */
+
+
+
 
 
 /**
  * 
  * @description
- * 方法1：最小模型法
  * 
- * 
- * Tips1: 把父、左子、右子，视为一个最小模型
- * 找出模型规律
- * 
- * 主要操作留给最后一层
+ * 思路：
+ * 最小模型法，找出模型规律
  */
-const frontTraverse = ( node: BinaryTreeNode ) => {
-    const arr: number[ ] = [ ];
-    const traverse = ( node: BinaryTreeNode | undefined ) => {
-        if ( !node ) return;
-        
+const frontTraverse = ( n: any ) => {
+    let res: any = [ ];
+    const loop = ( n: any ) => {
+        if ( !n ) return;
+        res.push( n );
+        loop( n.left );
+        loop( n.right );
     }
-    traverse( node );
-    return arr;
+    loop( n );
+    return res;
 }
 
