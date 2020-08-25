@@ -15,18 +15,27 @@
     输出: 42
  */
 
-var maxPathSum = function(root: any) {
-    let help = (node:any) => {
-        if(node == null) return 0;
-        let left = Math.max(help(node.left), 0);
-        let right = Math.max(help(node.right), 0);
-        let cur = left + node.val + right;
-        // 如果发现某一个节点上的路径值比max还大，则更新max
-        if(cur > max) max = cur;
-        // left 和 right 永远是"一根筋"，中间不会有转折
-        return Math.max(left, right) + node.val;
+
+
+/**
+ * 
+ * @description
+ * 
+ * 思路：
+ * 动态规划，计算所有节点以该节点为顶点的最大路径。
+ * 
+ * 拆：Max(x) = x.val + max( Arm(x.left)) + max( Arm(x.right))
+ * 方向：因为需要先解子问题，所有是自底向上（dfs）
+ */
+var maxPathSum = ( root: any ) => {
+    let dpMax = -Infinity;
+    const dfs = ( n: any ): any => {
+        if ( !n ) return 0;
+        const leftVal = dfs( n.left );
+        const rightVal = dfs( n.right );
+        dpMax = Math.max( dpMax, n.val + leftVal + rightVal ); // 更新max值
+        return Math.max( leftVal, rightVal, 0 ) + n.val; // 递归，向上返回当前节点的最大路径值
     }
-    let max = Number.MIN_SAFE_INTEGER;
-    help(root);
-    return max;
+    dfs( root );
+    return dpMax;
 };
