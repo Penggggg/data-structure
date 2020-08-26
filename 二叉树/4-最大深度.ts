@@ -21,7 +21,9 @@
  * @description
  * 
  * 思路：
- * 最优解通常伴随动态规划
+ * 最优解：动态规划
+ * 关系：X的最大深度 = max( x.left + 1, x.right + 1 )
+ * 方向：dfs + 自下而上
  */
 const maxDeep = ( n?: any ): any => {
    let dp = 0;

@@ -40,7 +40,6 @@
 
 const treePaths = ( root: any ) => {
     if ( !root ) return [ ];
-
     const res: any[ ] = [ ];
     const paths: any[ ] = [ ];
     const dfs = ( n: any ) => {

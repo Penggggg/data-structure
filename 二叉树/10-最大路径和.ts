@@ -34,7 +34,7 @@ var maxPathSum = ( root: any ) => {
         const leftVal = dfs( n.left );
         const rightVal = dfs( n.right );
         dpMax = Math.max( dpMax, n.val + leftVal + rightVal ); // 更新max值
-        return Math.max( leftVal, rightVal, 0 ) + n.val; // 递归，向上返回当前节点的最大路径值
+        return Math.max( leftVal, rightVal, 0 ) + n.val; // 递归，向上返回当前节点的最大路径值（！！！val有可能是负数）
     }
     dfs( root );
     return dpMax;
